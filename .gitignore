@@ -1,0 +1,6 @@
+node_modules
+ui/node_modules
+api/node_modules
+.DS_Store
+ui/.DS_Store
+api/.DS_Store

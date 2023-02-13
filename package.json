@@ -1,0 +1,15 @@
+{
+  "name": "bill-tracker",
+  "version": "1.0.0",
+  "description": "A tool to indicate support for Congressional Bills",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd ui && yarn start\" \"cd api && yarn start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
