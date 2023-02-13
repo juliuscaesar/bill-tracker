@@ -1,26 +1,11 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../auth/UserContext";
 import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
-  Box,
-  Card,
-  CardBody,
   Center,
   Container,
   Heading,
-  Progress,
   Spinner,
   useDisclosure,
-  Table,
-  Tr,
-  Td,
-  Text,
-  UnorderedList,
-  ListItem,
   VStack,
 } from "@chakra-ui/react";
 import { getAllBills } from "../services/bills";
@@ -28,12 +13,9 @@ import { getAllBillEngagements } from "../services/engagements";
 import { getAllUsers } from "../services/users";
 import Navbar from "./Navbar";
 import LogoutAlert from "./LogoutAlert";
-import {
-  calculateAverageInteractionRate,
-  calculateSupportRate,
-  getBillTitle,
-  getSupportBreakdownByDate,
-} from "../utils";
+import UserStatistics from "./UserStatistics";
+import BillStatistics from "./BillStatistics";
+import { calculateSupportRate, getSupportBreakdownByDate } from "../utils";
 
 function AdminDashboard() {
   const [bills, setBills] = useState([]);
@@ -66,7 +48,6 @@ function AdminDashboard() {
     setBills(bills.body);
     setUsers(users.body);
     setLoading(false);
-    console.log(billEngagements.body.billEngagementsSortedByBillId);
   };
 
   useEffect(() => {
@@ -87,99 +68,27 @@ function AdminDashboard() {
           </Center>
         ) : (
           <VStack spacing="1.5rem">
-            <Card minW="4xl">
-              <CardBody>
-                <Heading size="md">User Statistics</Heading>
-                <br />
-                <UnorderedList>
-                  <ListItem>
-                    <Text>
-                      <Text as="b">
-                        {Object.keys(billEngagementsByUser).length}
-                      </Text>{" "}
-                      out of <Text as="b">{users.length}</Text> registered users
-                      are engaged citizens- having indicated their support for
-                      at least one bill. (
-                      <Text as="b">
-                        {Math.round(
-                          (Object.keys(billEngagementsByUser).length /
-                            users.length) *
-                            100
-                        )}
-                        %
-                      </Text>
-                      )
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text>
-                      Users have indicated their support for a total of{" "}
-                      <Text as="b">{billEngagementCount}</Text> bills.
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text>
-                      Engaged users have indicated support for an average of{" "}
-                      <Text as="b">
-                        {calculateAverageInteractionRate(billEngagementsByUser)}
-                      </Text>{" "}
-                      bills each.
-                    </Text>
-                  </ListItem>
-                </UnorderedList>
-              </CardBody>
-            </Card>
-            {Object.keys(billEngagementsByBill).map((key) => {
+            <UserStatistics
+              billEngagementsByUser={billEngagementsByUser}
+              users={users}
+              billEngagementCount={billEngagementCount}
+            />
+            {Object.keys(billEngagementsByBill).map((billId) => {
               let { totalSupport, totalOppose, supportRate } =
-                calculateSupportRate(billEngagementsByBill[key]);
+                calculateSupportRate(billEngagementsByBill[billId]);
               let supportRateByDate = getSupportBreakdownByDate(
-                billEngagementsByBill[key]
+                billEngagementsByBill[billId]
               );
               return (
-                <Card key={key} minW="4xl">
-                  <CardBody>
-                    <Heading size="md">{key}</Heading>
-                    <Text>{getBillTitle(key, bills)}</Text>
-                    <br />
-                    <Progress
-                      colorScheme="green"
-                      size="lg"
-                      value={supportRate}
-                    />
-                    <br />
-                    <Center>
-                      <Text>
-                        <Text as="b">{supportRate}%</Text> support (
-                        {totalSupport} total) |{" "}
-                        <Text as="b">{100 - supportRate}%</Text> oppose (
-                        {totalOppose} total)
-                      </Text>
-                    </Center>
-                    <br />
-                    <Accordion allowToggle>
-                      <AccordionItem>
-                        <h2>
-                          <AccordionButton>
-                            <Box as="span" flex="1" textAlign="left">
-                              View breakdown by date
-                            </Box>
-                            <AccordionIcon />
-                          </AccordionButton>
-                        </h2>
-                        <AccordionPanel pb={4}>
-                          <Table>
-                            {Object.keys(supportRateByDate).map((key) => (
-                              <Tr>
-                                <Td>{key}</Td>
-                                <Td>{supportRateByDate[key]}%</Td>
-                              </Tr>
-                            ))}
-                          </Table>
-                        </AccordionPanel>
-                      </AccordionItem>
-                    </Accordion>
-                  </CardBody>
-                </Card>
+                <BillStatistics
+                  key={billId}
+                  billId={billId}
+                  bills={bills}
+                  supportRate={supportRate}
+                  totalSupport={totalSupport}
+                  totalOppose={totalOppose}
+                  supportRateByDate={supportRateByDate}
+                />
               );
             })}
           </VStack>
