@@ -22,6 +22,7 @@ export const calculateSupportRate = (engagements) => {
   let totalSupport = 0;
   let totalOppose = 0;
 
+  // eslint-disable-next-line
   engagements.map((engagement) => {
     if (engagement.supportedByUser) {
       totalSupport++;
@@ -47,6 +48,7 @@ export const getSupportBreakdownByDate = (engagements) => {
   let engagementsOrganizedByDate = {};
   let supportRateByDate = {};
 
+  // eslint-disable-next-line
   engagements.map((engagement) => {
     let formattedDate = moment(
       engagement.createdAt,
@@ -59,6 +61,7 @@ export const getSupportBreakdownByDate = (engagements) => {
     }
   });
 
+  // eslint-disable-next-line
   Object.keys(engagementsOrganizedByDate).map((key) => {
     let totalSupport = 0;
     let total = engagementsOrganizedByDate[key].length;
