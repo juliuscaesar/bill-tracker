@@ -39,7 +39,7 @@ function CitizenDashboard() {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   return (
     <UserContext.Provider value={user}>
