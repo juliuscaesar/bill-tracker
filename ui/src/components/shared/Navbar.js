@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../auth/UserContext";
+import { UserContext } from "../../auth/UserContext";
 import {
   Box,
   Flex,

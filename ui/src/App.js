@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "./auth/UserContext";
-import CitizenDashboard from "./components/CitizenDashboard";
-import AdminDashboard from "./components/AdminDashboard";
+import CitizenDashboard from "./components/citizen/CitizenDashboard";
+import AdminDashboard from "./components/admin/AdminDashboard";
 
 function App() {
   const user = useContext(UserContext);

@@ -6,7 +6,7 @@ import {
   ListItem,
   Text,
 } from "@chakra-ui/react";
-import { calculateAverageInteractionRate } from "../utils";
+import { calculateAverageInteractionRate } from "../../utils";
 
 export default function UserStatistics({
   billEngagementsByUser,

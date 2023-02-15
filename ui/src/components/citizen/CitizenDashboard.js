@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../auth/UserContext";
+import { UserContext } from "../../auth/UserContext";
 import {
   Center,
   Container,
@@ -8,12 +8,12 @@ import {
   Spinner,
   useDisclosure,
 } from "@chakra-ui/react";
-import { getAllBills } from "../services/bills";
-import { getEngagementsByUserId } from "../services/engagements";
+import { getAllBills } from "../../services/bills";
+import { getEngagementsByUserId } from "../../services/engagements";
 import Bill from "./Bill";
-import Navbar from "./Navbar";
-import LogoutAlert from "./LogoutAlert";
-import { getBillEngagement } from "../utils";
+import Navbar from "../shared/Navbar";
+import LogoutAlert from "../shared/LogoutAlert";
+import { getBillEngagement } from "../../utils";
 
 function CitizenDashboard() {
   const [bills, setBills] = useState([]);

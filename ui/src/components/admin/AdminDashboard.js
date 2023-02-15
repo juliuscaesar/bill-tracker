@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../auth/UserContext";
+import { UserContext } from "../../auth/UserContext";
 import {
   Center,
   Container,
@@ -8,14 +8,14 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { getAllBills } from "../services/bills";
-import { getAllBillEngagements } from "../services/engagements";
-import { getAllUsers } from "../services/users";
-import Navbar from "./Navbar";
-import LogoutAlert from "./LogoutAlert";
+import { getAllBills } from "../../services/bills";
+import { getAllBillEngagements } from "../../services/engagements";
+import { getAllUsers } from "../../services/users";
+import Navbar from "../shared/Navbar";
+import LogoutAlert from "../shared/LogoutAlert";
 import UserStatistics from "./UserStatistics";
 import BillStatistics from "./BillStatistics";
-import { calculateSupportRate, getSupportBreakdownByDate } from "../utils";
+import { calculateSupportRate, getSupportBreakdownByDate } from "../../utils";
 
 function AdminDashboard() {
   const [bills, setBills] = useState([]);

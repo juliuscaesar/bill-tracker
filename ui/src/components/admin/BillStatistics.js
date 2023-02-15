@@ -16,7 +16,7 @@ import {
   Tr,
   Td,
 } from "@chakra-ui/react";
-import { getBillTitle } from "../utils";
+import { getBillTitle } from "../../utils";
 
 export default function BillStatistics({
   billId,

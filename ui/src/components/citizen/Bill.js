@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../auth/UserContext";
+import { UserContext } from "../../auth/UserContext";
 import {
   Box,
   Button,
@@ -15,8 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import moment from "moment";
-import { createEngagement, deleteEngagement } from "../services/engagements";
-import { buildCongressGovLink } from "../utils";
+import { createEngagement, deleteEngagement } from "../../services/engagements";
+import { buildCongressGovLink } from "../../utils";
 
 export default function Bill({ bill, engagement, setBillEngagements }) {
   const user = useContext(UserContext);
