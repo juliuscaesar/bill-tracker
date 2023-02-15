@@ -70,7 +70,7 @@ function AdminDashboard() {
           <VStack spacing="1.5rem">
             <UserStatistics
               billEngagementsByUser={billEngagementsByUser}
-              users={users}
+              numberOfUsers={users.length}
               billEngagementCount={billEngagementCount}
             />
             {Object.keys(billEngagementsByBill).map((billId) => {

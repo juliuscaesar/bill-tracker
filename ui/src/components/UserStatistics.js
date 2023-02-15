@@ -8,7 +8,11 @@ import {
 } from "@chakra-ui/react";
 import { calculateAverageInteractionRate } from "../utils";
 
-export default function UserStatistics({ billEngagementsByUser, users, billEngagementCount }) {
+export default function UserStatistics({
+  billEngagementsByUser,
+  numberOfUsers,
+  billEngagementCount,
+}) {
   return (
     <Card minW="4xl">
       <CardBody>
@@ -18,12 +22,12 @@ export default function UserStatistics({ billEngagementsByUser, users, billEngag
           <ListItem>
             <Text>
               <Text as="b">{Object.keys(billEngagementsByUser).length}</Text>{" "}
-              out of <Text as="b">{users.length}</Text> registered users are
+              out of <Text as="b">{numberOfUsers}</Text> registered users are
               engaged citizens- having indicated their support for at least one
               bill. (
               <Text as="b">
                 {Math.round(
-                  (Object.keys(billEngagementsByUser).length / users.length) *
+                  (Object.keys(billEngagementsByUser).length / numberOfUsers) *
                     100
                 )}
                 %
