@@ -75,3 +75,21 @@ export const getSupportBreakdownByDate = (engagements) => {
 
   return supportRateByDate;
 };
+
+// builds the link to view bill on congress.gov
+export const buildCongressGovLink = (congress, type, number) => {
+  let billType = "";
+  switch (type) {
+    case "S":
+      billType = "senate-bill";
+      break;
+    case "HR":
+      billType = "house-bill";
+      break;
+    case "SRES:":
+      billType = "senate-resolution";
+      break;
+  }
+  const link = `https://congress.gov/bill/${congress}th-congress/${billType}/${number}`;
+  return link;
+};

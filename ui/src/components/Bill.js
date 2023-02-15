@@ -9,12 +9,14 @@ import {
   CardBody,
   Flex,
   Heading,
+  Link,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
+import { CheckIcon, CloseIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import moment from "moment";
 import { createEngagement, deleteEngagement } from "../services/engagements";
+import { buildCongressGovLink } from "../utils";
 
 export default function Bill({ bill, engagement, setBillEngagements }) {
   const user = useContext(UserContext);
@@ -60,7 +62,7 @@ export default function Bill({ bill, engagement, setBillEngagements }) {
             <Heading size="lg">
               {bill.type} {bill.number}
             </Heading>
-            <Heading size="md">{bill.title.replaceAll("\\", "")}</Heading>
+            <Heading size="md">{bill.title.replaceAll("\\", "")} </Heading>
             <br />
             <Text>
               <Text as="b">Last Update: </Text>
@@ -70,6 +72,17 @@ export default function Bill({ bill, engagement, setBillEngagements }) {
                 "MMMM DD, YYYY"
               )}
               )
+              <br />
+              <Link
+                href={buildCongressGovLink(
+                  bill.congress,
+                  bill.type,
+                  bill.number
+                )}
+                isExternal
+              >
+                <ExternalLinkIcon />
+              </Link>
             </Text>
           </Box>
           {engagement ? (
